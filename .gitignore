@@ -1,0 +1,18 @@
+# cache
+__pychache__/
+*.py[cod]
+
+*.log
+
+# random_data_gen.py output
+*.csv
+*.parquet
+
+# database.py output
+*.db
+
+# visualization.py output
+*.png
+
+# Dashboard Power BI
+*.pbix

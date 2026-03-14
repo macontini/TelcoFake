@@ -1,0 +1,83 @@
+# Configurazione Pipeline
+simulation:
+    # Velocità media di generazione è 1,5kk righe / minuto
+    samples_num: 3000000
+    start_date: "2024-01-01"
+    locale: "it_IT"
+    chunksize: 50000
+
+sql:
+    tbl_name: "train_telemetry"
+    db_fname: "railway_telemetry.db"
+
+paths:
+    data_dir: "data"
+    log_dir: "log"
+    reports: "reports"
+    charts: "charts"
+
+fake_id_schema:
+    # Codici matricola treni (es. ETR-A-061-09)
+    train: 'ETR-?-##%-#%'
+    # Codici matricola torre radio (es. CID-2603)
+    tower: 'CID-####%'
+
+geocoordinates:
+    milan_min_lat: 45.3
+    milan_max_lat: 45.6
+    milan_min_lon: 9.0
+    milan_max_lon: 9.3
+
+segments:
+    - 'MI_GRECO-MI_LAMBRATE'
+    - 'MI_LAMBRATE-MI_LORETO'
+    - 'MI_LORETO-RHO_FIERA'
+    - 'MI_ROGOREDO-MI_STASOFIA'
+
+unfortunate_trains: 15
+
+thresholds:
+    temp:
+        avg: 60
+        min: 0
+        max: 120
+    speed:
+        min_kmh: 0
+        max_kmh: 300
+    signal:
+        min_dbm: -110
+        max_dbm: -40
+
+speed_noise:
+    on_train:
+        lower_gain: 0.7 
+        upper_gain: 1.3
+    on_hour:
+        lower_gain: 0.8
+        upper_gain: 1.2
+
+signal_noise:
+    min: -15
+    max: 15
+
+probabilities:
+    network:
+        5G: 0.40
+        4G: 0.40
+        3G: 0.10
+        EDGE: 0.05
+        OFFLINE: 0.05
+    status:
+        OK: 0.95
+        WARNING: 0.04
+        CRITICAL: 0.01
+    broken_status:
+        OK: 0.6
+        WARNING: 0.3
+        CRITICAL: 0.1
+
+data_quality:
+    stops_num_fraction: 0.03
+    dirty_fraction_missing: 0.05
+    dirty_fraction_anomalies: 0.01
+    dirty_fraction_duplicates: 0.02
