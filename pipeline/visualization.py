@@ -108,7 +108,7 @@ class RailwayVisualizer:
     def _plot_temperature_anomalies(self, df: pd.DataFrame) -> None:
         """Strip plot per mostrare la distribuzione degli sbalzi termici per ogni treno"""
         sns.stripplot(data=df, x='train_id', y='delta_temp', hue='train_id', palette='flare', size=8, jitter=True, legend=False)
-        plt.title('Sbalzi Termici Anomali per Treno (Delta > 20°C)', fontsize=15, pad=20)
+        plt.title('Sbalzi Termici Anomali per Treno (Delta > 30°C)', fontsize=15, pad=20)
         plt.xlabel('ID Treno', fontsize=12)
         plt.ylabel('Variazione di Temperatura (°C)', fontsize=12)
         plt.xticks(rotation=45)
@@ -116,7 +116,7 @@ class RailwayVisualizer:
     @auto_plot
     def _plot_blackout_segments(self, df: pd.DataFrame) -> None:
         """Genera un grafico a barre orizzontali per i blackout di rete per tratta."""
-        df = df.sort_values('blackout_ratio', ascending=False).head(10)
+        df = df.sort_values('blackout_ratio', ascending=False)
         sns.barplot(data=df, x='blackout_ratio', y='line_segment', hue='line_segment', palette='rocket', legend=False)
         plt.title('Copertura Rete: Tratte con più Blackout / Segnale Scarso', fontsize=15, pad=20)
         plt.xlabel('Tasso di Blackout (0 = Mai, 1 = Sempre)', fontsize=12)
@@ -127,18 +127,16 @@ class RailwayVisualizer:
         """Genera un grafico a barre per l'efficienza energetica dei treni."""
         y_col = 'ratio' if 'ratio' in df.columns else df.columns[-1] 
 
-        # Ordiniamo per far risaltare i peggiori a sinistra o a destra
-        # Mostriamo solo i 10 peggiori per chiarezza
-        df = df.sort_values(y_col, ascending=False).head(10)
+        df = df.sort_values(y_col, ascending=False)
         sns.barplot(data=df, x='train_id', y=y_col, hue='train_id', palette='RdYlGn', legend=False)
-        plt.title('Top 10 Treni Meno Efficienti (Power/Speed Ratio)', fontsize=15, pad=20)
+        plt.title('Top 15 Treni Meno Efficienti (Power/Speed Ratio)', fontsize=15, pad=20)
         plt.xlabel('ID Treno', fontsize=12)
         plt.ylabel('Indice di Inefficienza (kW / km/h)', fontsize=12)
-        plt.xticks(rotation=45) # Ruotiamo le label se ci sono molti treni
+        plt.xticks(rotation=45) # Inclina le etichette per non farle toccare
 
     @auto_plot
     def _plot_signal_drops(self, df: pd.DataFrame) -> None:
-        """Genera un grafico a dispersione (scatter) per evidenziare i drop di segnale critici."""
+        """Genera un grafico a barre per evidenziare i drop di segnale critici."""
         sns.barplot(data=df, x='cell_tower_id', y='signal_drop', hue='cell_tower_id', palette='Reds_r', legend=False)
         plt.title('Top 15 Antenne più Instabili (Frequenza di Drop > 50 dBm)', fontsize=15, pad=20)
         plt.xlabel('ID Antenna Cella', fontsize=12)

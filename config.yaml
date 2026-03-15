@@ -38,9 +38,10 @@ unfortunate_trains: 15
 
 thresholds:
     temp:
-        avg: 60
         min: 0
         max: 120
+        avg: 60
+        devstd: 10
     speed:
         min_kmh: 0
         max_kmh: 300

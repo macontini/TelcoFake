@@ -16,3 +16,5 @@ __pychache__/
 
 # Dashboard Power BI
 *.pbix
+*.pbip
+BI Report*/

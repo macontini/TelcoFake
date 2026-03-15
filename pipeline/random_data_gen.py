@@ -31,8 +31,9 @@ def run(now: str) -> None:
 
         START_DATE = config['simulation']['start_date']
 
-        AVG_CELSIUS, MIN_CELSIUS, MAX_CELSIUS = (
+        AVG_CELSIUS, DEVSTD_CELSIUS, MIN_CELSIUS, MAX_CELSIUS = (
             config['thresholds']['temp']['avg'],
+            config['thresholds']['temp']['devstd'],
             config['thresholds']['temp']['min'],
             config['thresholds']['temp']['max']
         )
@@ -96,7 +97,7 @@ def run(now: str) -> None:
 
         # np.random.normal genera una distribuzione Gaussiana
         # Media, dev std, numero di campioni
-        'temp_celsius': np.random.normal(AVG_CELSIUS, 10, SAMPLES_NUM),
+        'temp_celsius': np.random.normal(AVG_CELSIUS, DEVSTD_CELSIUS, SAMPLES_NUM),
 
         # Estrae valori casuali basandosi sulle probabilità 'p'.
         'status': np.random.choice(
