@@ -92,6 +92,8 @@ run_stage analytics.py          "Report analitici creati via SQLite in $REPORTS_
 run_stage analytics_pandas.py   "Report analitici creati via Pandas in $REPORTS_DIR."
 # Visualization
 run_stage visualization.py      "Grafici salvati in $CHARTS_DIR."
+# Pre-processing
+run_stage preprocessing_bi.py   "Dati pronti per l'importazione in Power BI."
 
 MINUTES=$((SECONDS / 60))
 REMAINING_SECONDS=$((SECONDS % 60))
