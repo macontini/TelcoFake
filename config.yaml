@@ -17,10 +17,10 @@ paths:
     charts: "charts"
 
 fake_id_schema:
-    # Codici matricola treni (es. ETR-A-061-09)
-    train: 'ETR-?-##%-#%'
-    # Codici matricola torre radio (es. CID-2603)
-    tower: 'CID-####%'
+    # Codici matricola treni (es. ETR-X061)
+    train: 'TRN-?##'
+    # Codici matricola torre radio (es. CID-A63)
+    tower: 'TWR-?##'
 
 geocoordinates:
     milan_min_lat: 45.3

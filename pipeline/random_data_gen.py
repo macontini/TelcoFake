@@ -87,10 +87,14 @@ def run(now: str) -> None:
 
     # ----- GENERAZIONE -----
     logger.info(f"Generazione dati in corso (Obiettivo: {SAMPLES_NUM:,} righe).")
+
+    # .bothify trasforma '?' in lettere casuali da 'ABCDE', '#' in numeri casuali (0-9), '%' in numeri casuali non nulli (1-9)
+    train_pool = list(set(fake.bothify(text=TRAIN_ID, letters='XYZ').upper() for _ in range(1000)))
+    tower_pool = list(set(fake.bothify(text=TOWER_ID).upper() for _ in range(1000)))
+
     data = {
-        # .bothify trasforma '?' in lettere casuali da 'ABCDE', '#' in numeri casuali (0-9), '%' in numeri casuali non nulli (1-9)
-        'train_id': [fake.bothify(text=TRAIN_ID, letters='XYZ') for _ in range(SAMPLES_NUM)],
-        'cell_tower_id': [fake.bothify(text=TOWER_ID) for _ in range(SAMPLES_NUM)],
+        'train_id': np.random.choice(train_pool, SAMPLES_NUM),
+        'cell_tower_id': np.random.choice(tower_pool, SAMPLES_NUM),
 
         # Crea una sequenza temporale fissa. freq='min' aggiungendo un record ogni minuto
         'timestamp': pd.date_range(start=START_DATE, periods=SAMPLES_NUM, freq='min'),
