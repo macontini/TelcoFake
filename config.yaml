@@ -4,7 +4,7 @@ simulation:
     samples_num: 2500000
     start_date: "2024-01-01"
     locale: "it_IT"
-    chunksize: 50000
+    # chunksize: 50000
 
 sql:
     tbl_name: "train_telemetry"

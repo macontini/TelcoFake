@@ -185,7 +185,7 @@ def run(now: str) -> None:
         df['speed_kmh'] + np.random.normal(
             POWER_NOISE_MEAN,
             POWER_NOISE_DEVSTD,
-            SAMPLES_NUM
+            len(df)
         )
     )
     logger.info("Costruita colonna `power_consumption_kw`, "
@@ -225,7 +225,7 @@ def run(now: str) -> None:
 
     # Fermate
     df.loc[df.sample(frac=STOPS_NUM_FRACTION).index, 'speed_kmh'] = 0
-    logger.info(f"Fermate introdotte: frazione {STOPS_NUM_FRACTION} del totale ({STOPS_NUM_FRACTION*SAMPLES_NUM} velocità nulle)")
+    logger.info(f"Fermate introdotte: frazione {STOPS_NUM_FRACTION} del totale ({STOPS_NUM_FRACTION*len(df)} velocità nulle)")
 
     # SEGNALE
     # Associamo un malus per ogni tratta: successione di negativi (es. 0, -10, -20, -30, -40)

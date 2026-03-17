@@ -8,13 +8,16 @@ from functools import cached_property
 from conf import config, logger
 from conf import DATA_DIR, REPORTS_DIR
 
-CHUNKSIZE = config['simulation']['chunksize']
+# CHUNKSIZE = config['simulation']['chunksize']
 
 class PandasAnalytics:
-    def __init__(self, data_dir: Path, chunksize: int = 0) -> None:
+    def __init__(
+        self, data_dir: Path,
+        # chunksize: int = 0
+    ) -> None:
         self.data_dir = data_dir
         self.input_file = next(data_dir.glob('*.parquet'), None)
-        self.chunksize = chunksize or CHUNKSIZE
+        # self.chunksize = chunksize or CHUNKSIZE
         self.report_catalog: dict[Callable, list] = {
             # --- REPORT 1: ANALISI VELOCITÀ PER FASCIA ORARIA ---
             self.hourly_speed_analysis: ['hour', 'speed_kmh'],
@@ -71,7 +74,7 @@ class PandasAnalytics:
             output_path = output_dir / f"{i+1}_{report_name}.csv"
             try:
                 # Selezione colonne
-                df = self.dataframe[columns].copy()
+                df = self.dataframe[columns]
                 res = method(df)
                 # Salvataggio
                 res.to_csv(output_path, index=False)
@@ -415,7 +418,10 @@ if __name__ == "__main__":
 
     start_time = datetime.now()
 
-    analytics = PandasAnalytics(DATA_DIR, CHUNKSIZE)
+    analytics = PandasAnalytics(
+        DATA_DIR,
+        # CHUNKSIZE
+    )
 
     logger.info("Generazione report CSV (via Pandas) in corso...")
     analytics.generate_all_reports()
