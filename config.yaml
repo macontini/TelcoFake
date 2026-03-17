@@ -1,7 +1,7 @@
 # Configurazione Pipeline
 simulation:
     # Velocità media di generazione è 1,5kk righe / minuto
-    samples_num: 5000000
+    samples_num: 2500000
     start_date: "2024-01-01"
     locale: "it_IT"
     chunksize: 50000
