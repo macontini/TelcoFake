@@ -22,12 +22,12 @@ Simula l'ingestione, l'analisi e la visualizzazione dello stato di una flotta di
 
 Il progetto è strutturato come una pipeline batch composta da tre fasi principali:
 
-1. **Generazione Dati (`random_data_gen.py`):** creazione del dataset sintetico e salvataggio in formato Parquet/CSV e database SQLite.
-2. **Motore di Analisi (Dual Engine):** elaborazione di 11 report analitici implementati in due versioni:
+1. **Generazione (`random_data_gen.py`):** creazione del dataset sintetico e salvataggio in formato Parquet/CSV e database SQLite.
+2. **Analisi:** elaborazione di 11 report analitici implementati in due versioni:
    - `analytics.py`: basato su query SQL (CTE, Window Functions) eseguite tramite SQLite.
    - `analytics_pandas.py`: basato su calcolo vettoriale in memoria tramite Pandas.
 3. **Visualizzazione (`visualization.py`):** generazione automatica di grafici tramite un pattern a catalogo (`@auto_plot`), che mappa ogni report esportato alla relativa visualizzazione ottimale.
-4. **Semantic Layer Preparation (`preprocessing_bi.py`):** script di trasformazione (*Transform*) finale che ottimizza il dataset per il motore colonnare di Power BI, per ottenere un *parquet* pronto per l'importazione (*Load*) in Power BI.
+4. **Preparation (`preprocessing_bi.py`):** script di trasformazione (*Transform*) finale che ottimizza il dataset per il motore colonnare di Power BI, per ottenere un *parquet* pronto per l'importazione (*Load*) in Power BI.
 
 ## Dataset
 
